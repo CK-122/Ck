@@ -8,6 +8,30 @@ import { ArrowRight, GraduationCap } from 'lucide-react';
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-white to-accent/5 overflow-hidden">
+      {/* Navigation Header */}
+      <header className="absolute top-0 left-0 w-full z-20 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Image
+                src="/logo.png"
+                alt="CK High School Logo"
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
+              <span className="font-bold text-primary">CK High School</span>
+            </div>
+            <Button asChild size="sm">
+              <Link href="/login">
+                Login
+                <ArrowRight className="ml-2 h-3 w-3" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
