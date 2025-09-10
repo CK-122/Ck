@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Allow all hosts for Replit environment
+  experimental: {
+    allowedHosts: true,
+  },
 };
 
 export default nextConfig;
