@@ -17,7 +17,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
-import { generateMarksheet, GenerateMarksheetOutput } from "@/ai/flows/generate-marksheet";
 import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
@@ -27,7 +26,7 @@ const formSchema = z.object({
 
 const GenerateMarksheetFormComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<GenerateMarksheetOutput | null>(null);
+  const [result, setResult] = useState<any | null>(null);
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,9 +41,13 @@ const GenerateMarksheetFormComponent = () => {
     setIsLoading(true);
     setResult(null);
     try {
-      const response = await generateMarksheet(values);
-      setResult(response);
-      toast({ title: "Marksheet Generated", description: "The marksheet data has been successfully generated." });
+      // Placeholder for marksheet generation
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate processing time
+      
+      toast({ 
+        title: "Feature Coming Soon", 
+        description: "AI-powered marksheet generation will be available in a future update." 
+      });
     } catch (error: any) {
       console.error(error);
       toast({ variant: "destructive", title: "Generation Failed", description: error.message || "Could not generate the marksheet." });

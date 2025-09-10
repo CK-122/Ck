@@ -10,7 +10,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, PlusCircle, Trash2, Image as ImageIcon } from "lucide-react";
-import { generateAdmitCards, GenerateAdmitCardsInput } from "@/ai/flows/generate-admit-cards";
 import { useToast } from "@/hooks/use-toast";
 
 const studentSchema = z.object({
@@ -51,23 +50,13 @@ const GenerateAdmitCardFormComponent = () => {
   const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
-      const result = await generateAdmitCards(values as GenerateAdmitCardsInput);
+      // Placeholder for admit card generation
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate processing time
       
-      const pdfContent = atob(result.pdfDataUri.split(',')[1]);
-      const byteNumbers = new Array(pdfContent.length);
-      for (let i = 0; i < pdfContent.length; i++) {
-        byteNumbers[i] = pdfContent.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], {type: 'application/pdf'});
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'admit-cards.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      toast({ title: "Admit Cards Generated", description: "PDF download has started." });
+      toast({ 
+        title: "Feature Coming Soon", 
+        description: "AI-powered admit card generation will be available in a future update." 
+      });
     } catch (error) {
       console.error(error);
       toast({ variant: "destructive", title: "Generation Failed", description: "Could not generate the admit cards." });
