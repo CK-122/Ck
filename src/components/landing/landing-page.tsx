@@ -8,10 +8,7 @@ const HeroSection = dynamic(() => import('./hero-section').then(mod => ({ defaul
   loading: () => <div className="min-h-screen flex items-center justify-center"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div></div>
 });
 
-const AboutSection = dynamic(() => import('./about-section').then(mod => ({ default: mod.AboutSection })));
 const FeaturesSection = dynamic(() => import('./features-section').then(mod => ({ default: mod.FeaturesSection })));
-const TestimonialsSection = dynamic(() => import('./testimonials-section').then(mod => ({ default: mod.TestimonialsSection })));
-const FooterSection = dynamic(() => import('./footer-section').then(mod => ({ default: mod.FooterSection })));
 
 export function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -34,10 +31,7 @@ export function LandingPage() {
   return (
     <div className="min-h-screen">
       <HeroSection />
-      <AboutSection />
       <FeaturesSection />
-      <TestimonialsSection />
-      <FooterSection />
     </div>
   );
 }
