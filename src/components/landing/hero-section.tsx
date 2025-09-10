@@ -75,15 +75,8 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-400">
-              <Button asChild size="lg" className="group">
-                <Link href="/login">
-                  Login to Portal
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-              
               <Button asChild variant="outline" size="lg" className="group">
-                <Link href="#about">
+                <Link href="#features">
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
