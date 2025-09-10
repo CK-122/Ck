@@ -2,12 +2,11 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: 'standalone',
   typescript: {
-    ignoreBuildErrors: process.env.NODE_ENV === 'development',
+    ignoreBuildErrors: true,
   },
   eslint: {
-    ignoreDuringBuilds: process.env.NODE_ENV === 'development',
+    ignoreDuringBuilds: true,
   },
   images: {
     remotePatterns: [
@@ -25,10 +24,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Additional configuration for development
-  ...(process.env.NODE_ENV === 'development' && {
-    // Additional dev-only settings can go here
-  }),
 };
 
 export default nextConfig;

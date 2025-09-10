@@ -4,6 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+packages = ["unzip"]
 
 [workflows]
 runButton = "Project"
@@ -32,10 +33,6 @@ waitForPort = 5000
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 37631
-externalPort = 3000
 
 [deployment]
 deploymentTarget = "autoscale"
