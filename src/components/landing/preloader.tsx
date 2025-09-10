@@ -1,20 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-export function Preloader() {
-  const [isLoading, setIsLoading] = useState(true);
+interface PreloaderProps {
+  isVisible: boolean;
+}
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // 2 seconds preloader
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!isLoading) return null;
+export function Preloader({ isVisible }: PreloaderProps) {
+  if (!isVisible) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">

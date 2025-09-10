@@ -1,35 +1,43 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
-import { Preloader } from './preloader';
-import { HeroSection } from './hero-section';
-import { AboutSection } from './about-section';
-import { FeaturesSection } from './features-section';
-import { TestimonialsSection } from './testimonials-section';
-import { FooterSection } from './footer-section';
+
+// Dynamic import components to avoid hydration issues
+const HeroSection = dynamic(() => import('./hero-section').then(mod => ({ default: mod.HeroSection })), {
+  loading: () => <div className="min-h-screen flex items-center justify-center"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div></div>
+});
+
+const AboutSection = dynamic(() => import('./about-section').then(mod => ({ default: mod.AboutSection })));
+const FeaturesSection = dynamic(() => import('./features-section').then(mod => ({ default: mod.FeaturesSection })));
+const TestimonialsSection = dynamic(() => import('./testimonials-section').then(mod => ({ default: mod.TestimonialsSection })));
+const FooterSection = dynamic(() => import('./footer-section').then(mod => ({ default: mod.FooterSection })));
 
 export function LandingPage() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
+    setMounted(true);
   }, []);
 
-  return (
-    <>
-      {isLoading && <Preloader />}
-      <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-        <HeroSection />
-        <AboutSection />
-        <FeaturesSection />
-        <TestimonialsSection />
-        <FooterSection />
+  if (!mounted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <div className="relative">
+          <div className="animate-spin h-12 w-12 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
+          <p className="mt-4 text-sm text-muted-foreground text-center">Loading CK High School...</p>
+        </div>
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className="min-h-screen">
+      <HeroSection />
+      <AboutSection />
+      <FeaturesSection />
+      <TestimonialsSection />
+      <FooterSection />
+    </div>
   );
 }
