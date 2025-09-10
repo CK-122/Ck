@@ -2,11 +2,12 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: 'standalone',
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: process.env.NODE_ENV === 'development',
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: process.env.NODE_ENV === 'development',
   },
   images: {
     remotePatterns: [
@@ -24,9 +25,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Allow all hosts for Replit environment
+  // Allow all hosts for Replit environment (development only)
   experimental: {
-    allowedHosts: true,
+    ...(process.env.NODE_ENV === 'development' && {
+      allowedDevOrigins: ["*.replit.dev", "127.0.0.1"],
+    }),
   },
 };
 
