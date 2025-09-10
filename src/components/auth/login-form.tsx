@@ -17,12 +17,17 @@ export function LoginForm() {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate login process
-    setTimeout(() => {
-      setIsLoading(false);
-      // For demo purposes, redirect to dashboard
+    try {
+      // Import the signIn function from auth library
+      const { signIn } = await import('@/lib/auth');
+      await signIn(email, password);
       router.push('/dashboard');
-    }, 1000);
+    } catch (error) {
+      console.error('Login failed:', error);
+      alert('Login failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

@@ -26,12 +26,17 @@ export function SignupForm() {
     
     setIsLoading(true);
     
-    // Simulate signup process
-    setTimeout(() => {
+    try {
+      // Import the signUp function from auth library
+      const { signUp } = await import('@/lib/auth');
+      await signUp(formData.email, formData.password, formData.name);
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Signup failed:', error);
+      alert('Signup failed. Please try again.');
+    } finally {
       setIsLoading(false);
-      // For demo purposes, redirect to login
-      router.push('/login');
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -25,12 +25,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Allow all hosts for Replit environment (development only)
-  experimental: {
-    ...(process.env.NODE_ENV === 'development' && {
-      allowedDevOrigins: ["*.replit.dev", "127.0.0.1"],
-    }),
-  },
+  // Additional configuration for development
+  ...(process.env.NODE_ENV === 'development' && {
+    // Additional dev-only settings can go here
+  }),
 };
 
 export default nextConfig;
